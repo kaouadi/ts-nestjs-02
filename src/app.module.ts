@@ -1,11 +1,24 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersController } from './users/users.controller';
+
+import { UsersModule } from './users/users.module';
+
+import { Connection } from 'typeorm';
 
 @Module({
-  imports: [],
-  controllers: [AppController, UsersController],
+  imports: [UsersModule, TypeOrmModule.forRoot()],
+  controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  constructor(private connection: Connection){}
+  configure(consumer: MiddlewareConsumer) {
+    /*
+      Area to implement MiddleWare
+
+    */
+
+  }
+}
