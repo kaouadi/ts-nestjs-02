@@ -12,13 +12,6 @@ import { Connection } from 'typeorm';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule {
+export class AppModule {
   constructor(private connection: Connection){}
-  configure(consumer: MiddlewareConsumer) {
-    /*
-      Area to implement MiddleWare
-
-    */
-
-  }
 }
